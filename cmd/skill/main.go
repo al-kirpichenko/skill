@@ -1,19 +1,23 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 )
 
 // функция main вызывается автоматически при запуске приложения
 func main() {
+	// обрабатываем аргументы командной строки
+	//parseFlags()
+
 	if err := run(); err != nil {
 		panic(err)
 	}
 }
 
-// функция run будет полезна при инициализации зависимостей сервера перед запуском
 func run() error {
-	return http.ListenAndServe(`:8080`, http.HandlerFunc(webhook))
+	fmt.Println("Running server on", ":8080")
+	return http.ListenAndServe(":8080", http.HandlerFunc(webhook))
 }
 
 // функция webhook — обработчик HTTP-запроса
