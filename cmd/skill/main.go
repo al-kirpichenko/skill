@@ -2,22 +2,22 @@ package main
 
 import (
 	"fmt"
+	"github.com/al-kirpichenko/skill/cmd/config"
 	"net/http"
 )
 
 // функция main вызывается автоматически при запуске приложения
 func main() {
-	// обрабатываем аргументы командной строки
-	//parseFlags()
-
 	if err := run(); err != nil {
 		panic(err)
 	}
 }
 
 func run() error {
-	fmt.Println("Running server on", ":8080")
-	return http.ListenAndServe(":8080", http.HandlerFunc(webhook))
+
+	conf := config.NewConfig()
+	fmt.Println("Running server on", conf.Host)
+	return http.ListenAndServe(conf.Host, http.HandlerFunc(webhook))
 }
 
 // функция webhook — обработчик HTTP-запроса
